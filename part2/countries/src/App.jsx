@@ -38,10 +38,6 @@ const App = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleHideCountry = () => {
-    setSelectedCountry(null);
-  };
-
   const handleSelectedCountry = (id) => {
     setSelectedCountry(countries.filter((country) => country.id === id)[0]);
   };
@@ -66,10 +62,7 @@ const App = () => {
         selectedCountry={selectedCountry}
       />
 
-      <CountryDetail
-        selectedChecking={selectedChecking}
-        handleHideCountry={handleHideCountry}
-      />
+      <CountryDetail selectedChecking={selectedChecking} />
     </div>
   );
 };
