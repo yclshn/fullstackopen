@@ -37,11 +37,11 @@ const CountryDetail = ({ selectedChecking }) => {
         width={200}
       />
       <h2>Weather in {selectedChecking.capital}</h2>
-      <p>temperature {(weatherInfo.main.temp - 273.15).toFixed(2)} Celcius</p>
+      <p>temperature {(weatherInfo?.main.temp - 273.15).toFixed(2)} Celcius</p>
       <img
-        src={`https://openweathermap.org/img/w/${weatherInfo.weather[0].icon}.png`}
+        src={`https://openweathermap.org/img/w/${weatherInfo?.weather[0].icon}.png`}
       />
-      <p>wind {weatherInfo.wind.speed} m/s</p>
+      <p>wind {weatherInfo?.wind.speed} m/s</p>
     </div>
   );
 };
