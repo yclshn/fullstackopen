@@ -94,6 +94,25 @@ describe('addition of a new blog', () => {
     expect(titles).toContain('Canonical string reduction')
   })
 
+  test('adding blogs fails with proper status code', async () => {
+    const token = await helper.tokenExtractor(api, 'root', 'sekret')
+    const newBlog = {
+      title: 'Canonical string reduction',
+      author: 'Edgsger W. Dijkstra',
+      url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
+      likes: 12,
+    }
+    await api
+      .post('/api/blogs')
+      .set('Authorization', `Bearer${token}`) //Missing space after Bearer
+      .send(newBlog)
+      .expect(401)
+      .expect('Content-Type', /application\/json/)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+  })
+
   test('title or url is missing from req body and not added', async () => {
     const token = await helper.tokenExtractor(api, 'root', 'sekret')
     const newBlog = {
